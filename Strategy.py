@@ -7,13 +7,6 @@ def parse_time(time_str):  # convert "9:15" to int [9, 15]
     return list(map(int, time_str.split(":")))
 
 
-#    hour, second = list(map(int, time_str.split(":")))  # convert "9:15" to int (9, 15)
-#    return [hour, second]
-
-
-print(parse_time("9:15"))
-
-
 def sum_time(time_list):  # 返回总时间（分钟为单位）
     return time_list[0] * 60 + time_list[1]
 
@@ -89,7 +82,7 @@ def geo_distance(lng1, lat1, lng2, lat2):  # 根据经纬坐标计算在地球�
     return r
 
 
-def get_heuristic():  # 从node到终点的预估危险值
+def get_heuristic():        # 从node到终点的预估危险值
     def heuristic(node, end):
         geo_distance_km = geo_distance(Data.map_geo[node][0],  # node和end的经纬坐标
                                        Data.map_geo[node][1],
@@ -100,7 +93,7 @@ def get_heuristic():  # 从node到终点的预估危险值
     return heuristic
 
 
-def update_time(index):  # 返回经过班次后的时间
+def update_time(index):     # 返回经过班次后的时间
     update_minutes = sum_time(parse_time(Data.time_table_values[index][4])) + sum_time(
         parse_time(Data.time_table_values[index][5]))  # 班次的起始时间 + 班次的路程时间
     h = update_minutes // 60
@@ -111,13 +104,13 @@ def update_time(index):  # 返回经过班次后的时间
     return [h, m]
 
 
-def is_in_limit_time(limit_time, index):    # 是否在规定的时间
+def is_in_limit_time(limit_time, index):        # 判断是否在规定的时间
     end_time = sum_time(parse_time(Data.time_table_values[index][4])) + sum_time(
         parse_time(Data.time_table_values[index][5]))  # 班次的起始时间 + 班次的路程时间
     return limit_time >= end_time
 
 
-def a_star_graph_search(
+def a_star_graph_search(    # A* 算法
         start,
         end,
         start_time,
@@ -136,24 +129,19 @@ def a_star_graph_search(
     while frontier:
         node, current_time = frontier.pop()  # node="北京"（开启列表中优先级最高（加权危险值最低）的节点）
 
-        # print("node popped name:", node)
-        # print("current time:", current_time)
         if node in visited:  # 已经在关闭列表中
             continue
         if goal_function(node, end):  # 到达终点，返回路线
             return reconstruct_path(came_from, start, node)
         visited.add(node)
-        for successor_node, successor_info in successor_function(node,
-                                                                 current_time).items():  # successor=[all_danger, index]
-            # print(successor_node)
-            # print(successor_info)
+        for successor_node, successor_info in successor_function(
+                                                node, current_time).items():  # successor=[all_danger, index]
+
             update_t = update_time(successor_info[1])  # 更新时间
             priority_update = dangers[node] + successor_info[0] + heuristic(successor_node, end)
             # 计算优先级 F = G + H （到后继节点的危险值 + 从后继节点到终点的预估危险值）
 
-            # print("successor_node:", successor_node)
             print("update_t:", update_t, sum_time(update_t))
-            # print("danger:", priority_update)
             if is_in_limit_time(limit_time, successor_info[1]) or limit_time == -1:  # -1代表最小风险策略，否则使用规定时间的策略
                 frontier.add(  # 把后继节点添加到开启列表
                     [successor_node, update_t],
@@ -172,14 +160,11 @@ def a_star_graph_search(
 
 class Solution:
 
-    def __init__(self, start_place="北京", end_place="广州", start_time="9:15", limit_time=-1):
-        self.start_place = start_place
-        self.start_time = start_time
-        self.end_place = end_place
-        if limit_time != -1:  # 限时最小风险策略
-            self.limit_time = limit_time * 60  # 分钟为单位
-        else:  # 最小风险策略
-            self.limit_time = -1
+    def __init__(self):
+        self.start_place = "北京"
+        self.end_place = "广州"
+        self.start_time = "7:00"
+        self.limit_time = -1
 
     def shortestPath(self, start_place="北京", end_place="广州", start_time="9:15", limit_time=-1):
         self.start_place = start_place

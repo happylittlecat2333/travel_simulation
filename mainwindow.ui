@@ -33,22 +33,33 @@
     <property name="bottomMargin">
      <number>20</number>
     </property>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_travel">
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_log">
       <property name="font">
        <font>
         <family>幼圆</family>
         <pointsize>12</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
        </font>
       </property>
       <property name="text">
-       <string>旅客行程信息</string>
+       <string>LOG</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="1" rowspan="4">
+    <item row="2" column="0" rowspan="2">
+     <widget class="QLabel" name="label_pic">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" rowspan="4">
      <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,1,0,1,0">
       <property name="spacing">
        <number>10</number>
@@ -192,46 +203,57 @@
      </layout>
     </item>
     <item row="4" column="0">
-     <widget class="QLabel" name="label_log">
+     <widget class="QLabel" name="label_travel">
       <property name="font">
        <font>
         <family>幼圆</family>
         <pointsize>12</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="text">
-       <string>LOG</string>
+       <string>旅客行程信息</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" rowspan="2">
-     <widget class="QLabel" name="label_pic">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>1</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" colspan="2" alignment="Qt::AlignHCenter">
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <family>Agency FB</family>
-        <pointsize>18</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>COVID-19疫情环境下低风险旅行模拟系统</string>
-      </property>
-      <property name="margin">
-       <number>10</number>
-      </property>
-     </widget>
+    <item row="0" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="2,0">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <family>Agency FB</family>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>COVID-19疫情环境下低风险旅行模拟系统</string>
+        </property>
+        <property name="margin">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_quit">
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>退出</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
